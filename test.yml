@@ -1,0 +1,66 @@
+name: Blank Workflow
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main", "dev"]
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build type'
+        required: true
+        type: string
+        default: 'Debug'
+
+#jobs:
+jobs:
+  #build:
+  build:
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    #steps:
+    steps:
+      #- name: Checkout Code
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        #uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+        
+      - name: Print build type
+        run: |
+          echo "Build type: ${{ inputs.build_type }}"
+  
+
+
+          
+##name: APKForge CI
+
+##on:
+  ##push:
+    ##branches: ["main", "dev"]
+  ##pull_request:
+    ##branches: ["main", "dev"]
+  ##workflow_dispatch:
+    ##inputs:
+      ##build_type:
+        ##description: 'Select build type'
+        ##required: true
+        ##default: 'debug'
+        ##type: choice
+        ##options:
+          #- debug
+          #- release
+
+#jobs:
+  #Forge:
+    #uses: Xavatar3/ci-template/.github/workflows/test.yml@main
+    #with:
+      #build_type: ${{ github.event.inputs.build_type }}
+
+
